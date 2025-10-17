@@ -8,9 +8,12 @@ import seedu.quotely.exception.QuotelyException;
 import seedu.quotely.parser.Parser;
 import seedu.quotely.ui.Ui;
 import seedu.quotely.util.LoggerConfig;
+
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Quotely {
+    private static Logger logger;
     private Ui ui;
     private CompanyName companyName;
     private QuoteList quoteList;
@@ -60,13 +63,20 @@ public class Quotely {
         ui.showLine();
         while (!isExit) {
             try {
+                logger.finer("Reading user inputs...");
                 String fullCommand = ui.readCommand(state);
                 ui.showLine();
+                logger.finer("Read successful, parsing command: ...");
+                // parser throws QuotelyException if parse invalid
                 Command c = Parser.parse(fullCommand, state, quoteList);
+                logger.finer("Parse successful, executing command...");
+                // execute throws QuotelyException if data mutation fails
                 c.execute(ui, quoteList, companyName, state);
                 isExit = c.isExit();
             } catch (QuotelyException e) {
                 ui.showError(e.getMessage());
+                //log execute error severe with e trace
+                logger.log(Level.SEVERE, e.getMessage(), e);
             } finally {
                 ui.showLine();
             }
@@ -77,7 +87,7 @@ public class Quotely {
         // Initialize global logging configuration
         LoggerConfig.initializeGlobalLogging();
 
-        Logger logger = LoggerConfig.getLogger(Quotely.class);
+        logger = LoggerConfig.getLogger(Quotely.class);
         logger.info("Starting Quotely application");
 
         try {

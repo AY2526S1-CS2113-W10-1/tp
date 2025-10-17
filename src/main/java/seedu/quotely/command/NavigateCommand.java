@@ -6,8 +6,12 @@ import seedu.quotely.data.QuoteList;
 import seedu.quotely.data.QuotelyState;
 import seedu.quotely.data.Quote;
 import seedu.quotely.exception.QuotelyException;
+import seedu.quotely.util.LoggerConfig;
+
+import java.util.logging.Logger;
 
 public class NavigateCommand extends Command {
+    private static final Logger logger = LoggerConfig.getLogger(NavigateCommand.class);
     private Quote quote;
 
     public NavigateCommand(Quote quote) {
@@ -30,6 +34,7 @@ public class NavigateCommand extends Command {
                 ui.showMessage("You're already at the main menu.");
             } else {
                 ui.showMessage("Navigating to the main menu.");
+                logger.info("State set to outside quote");
                 state.setOutsideQuote();
             }
             return;
@@ -40,6 +45,8 @@ public class NavigateCommand extends Command {
 
         } else { //if trying to navigate to the same quote
             ui.showMessage("Navigating to quote: " + quote.getQuoteName());
+            logger.info(String.format("State set to inside quote with reference %s",
+                    quote.getQuoteName()));
             state.setQuoteReference(quote);
             state.setInsideQuote(quote);
         }
