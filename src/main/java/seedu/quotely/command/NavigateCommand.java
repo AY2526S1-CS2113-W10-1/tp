@@ -6,8 +6,12 @@ import seedu.quotely.data.QuoteList;
 import seedu.quotely.data.QuotelyState;
 import seedu.quotely.data.Quote;
 import seedu.quotely.exception.QuotelyException;
+import seedu.quotely.util.LoggerConfig;
+
+import java.util.logging.Logger;
 
 public class NavigateCommand extends Command {
+    private static final Logger logger = LoggerConfig.getLogger(NavigateCommand.class);
     private Quote quote;
 
     public NavigateCommand(Quote quote) {
@@ -27,19 +31,26 @@ public class NavigateCommand extends Command {
 
         if (quote == null) { //if trying to navigate to main menu
             if (state.getQuoteReference() == null) {
+                assert !state.isInsideQuote() : "invalid state for navigation";
                 ui.showMessage("You're already at the main menu.");
             } else {
+                assert state.isInsideQuote() : "invalid state for navigation";
                 ui.showMessage("Navigating to the main menu.");
+                logger.info("State set to outside quote");
                 state.setOutsideQuote();
             }
             return;
         }
 
-        if (state.getQuoteReference() == quote) { //if at main menu
+        if (state.getQuoteReference() == quote) { //if inside quote
+            assert state.isInsideQuote() : "invalid state for navigation";
             ui.showMessage("You're already at quote: " + quote.getQuoteName());
 
-        } else { //if trying to navigate to the same quote
+        } else { //if trying to navigate to the different quote
+            assert !state.isInsideQuote() : "invalid state for navigation";
             ui.showMessage("Navigating to quote: " + quote.getQuoteName());
+            logger.info(String.format("State set to inside quote with reference %s",
+                    quote.getQuoteName()));
             state.setQuoteReference(quote);
             state.setInsideQuote(quote);
         }
