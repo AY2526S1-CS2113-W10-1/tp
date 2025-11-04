@@ -22,7 +22,7 @@ Quotely is a lightweight CLI application for creating and exporting quotations. 
 - Attend discussion during weekly team meetings and brainstorm weekly Todos and issues
 
 #### Review/mentoring contributions:
-- Link to PRs reviewed [here](https://github.com/AY2526S1-CS2113-W10-1/tp/pulls?q=++reviewed-by%3A%40me).
+- Link to PRs reviewed [here](https://github.com/AY2526S1-CS2113-W10-1/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3Airw9n).
 
 <div style="page-break-after: always;"></div>
 
