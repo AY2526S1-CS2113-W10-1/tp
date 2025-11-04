@@ -67,47 +67,94 @@ Alice -> Bob: test
 @enduml
 ```
 
-- `/uml/class-diagram.puml` (created for you):
+- `/uml/classDiagrams/quotely.txt`:
 
 ```plantuml
 @startuml
-skinparam shadowing false
+hide circle
 skinparam classAttributeIconSize 0
 
-package "seedu.quotely" {
-  class Parser
-  class Quote {
-    - quoteName: String
-    - customerName: String
-    - items: List<Item>
-    + getQuoteName(): String
-    + getCustomerName(): String
-    + getItems(): List<Item>
-  }
-  class Item {
-    - itemName: String
-    - quantity: int
-    - price: double
-  }
-  class QuoteList {
-    - quotes: List<Quote>
-    + addQuote(q: Quote)
-  }
+title Quotely Class Diagram
+top to bottom direction
 
-  QuoteList "1" o-- "*" Quote
-  Quote "1" o-- "*" Item
-  Parser --> QuoteList : uses
+package command as Cmd {
+  abstract class Command  
 }
 
+package data as Data {
+  class CompanyName
+  class Item
+  class Quote
+  class QuoteList
+  class QuotelyState
+
+  Quote -> Item
+  QuoteList --> Quote
+}
+
+package parser as ParserComp {
+  class Parser
+}
+
+package storage as StorageComp {
+  class JsonSerializer
+  class Storage
+}
+
+package ui as UIComp {
+  class Ui
+}
+
+package util as Util {
+  class LoggerConfig
+}
+
+package main as Main {
+  class Quotely
+}
+
+Parser <- Quotely
+Ui <-- Quotely
+Quotely -> JsonSerializer
+Quotely --> LoggerConfig
+
+Quotely -> CompanyName
+Quotely -> QuoteList
+Quotely -> QuotelyState
+
+Parser -> Command
+
+Command ..> QuoteList
+Command ..> CompanyName
+Command ..> QuotelyState
+Command .> Ui
+
+
+Cmd -[hidden]-> Data
 @enduml
+
+Quotely -left-> LoggerConfig
+Quotely -up-> JsonSerializer
+Quotely -> Ui
+Quotely --> CompanyName
+Quotely -> QuoteList
+Quotely --> QuotelyState
+
+Parser --> Command
+Command .left> Ui
+Command ..> QuoteList
+Command ..> CompanyName
+Command ..> QuotelyState
 ```
+
+![Quotely class diagram](./diagrams/class/quotely.png)
 
 ### Embedding generated images in docs
 
-If you export to `/docs/images/uml`, reference them in Markdown like:
+If you export to `/docs/diagrams/class`, reference them in Markdown like:
 
 ```markdown
-![Class Diagram](images/uml/class-diagram.png)
+![Class Diagram](./diagrams/class/quotely.png)
 ```
 
 ### Tips

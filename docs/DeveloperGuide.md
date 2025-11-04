@@ -581,7 +581,7 @@ The file storage feature ensures all data is saved to local file preventing data
 
 The sequence diagram below illustrates the loading process at startup and the saving process after a command.
 
-!['Gson sequence diagram'](diagrams/sequence/json.png)
+!['Gson sequence diagram'](diagrams/sequence/gson.png)
 
 #### Developers note (Implementation of File Storage)
 
