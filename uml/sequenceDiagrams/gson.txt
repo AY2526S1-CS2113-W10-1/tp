@@ -3,17 +3,18 @@ actor Actor
 participant ":Quotely" as Quotely
 participant ":Storage" as Storage
 participant ":JsonSerializer" as Serializer
-participant "appData:ApplicationData" as AppData
+participant "appData1:ApplicationData" as AppData1
+participant "appData2:ApplicationData" as AppData2
 participant ":Parser" as Parser
 participant "cmd:Command" as Command
-database ":data/quotely.json" as DB
+database "quotely.json" as DB
 
 skinparam sequenceArrowThickness 2
 skinparam roundcorner 5
 skinparam padding 2
 
 group App Startup (Loading Data)
-    Actor -> Quotely ++: Starts Application
+    Actor -> Quotely ++ #Gold: Starts Application
     Quotely -> Quotely: new Quotely()
 
     Quotely -> Quotely ++ #LightBlue: loadDataFromFile()
@@ -22,20 +23,20 @@ group App Startup (Loading Data)
     Storage --> Quotely: jsonString
     deactivate Storage
 
-    Quotely -> Serializer ++ #FFBBBB: deserialize(jsonString)
-    Serializer --> Quotely --: appData:ApplicationData
-    deactivate Serializer
+    Quotely -> Serializer ++ #technology: deserialize(jsonString)
+    Serializer -> AppData1 **: new ApplicationData(jsonString)
+    activate AppData1 #LavenderBlush
+    return appData:ApplicationData
+    return appData:ApplicationData
 
-    Quotely -> AppData ++: getQuoteList()
-    AppData --> Quotely: quoteList
-    deactivate AppData
+    Quotely -> AppData1 ++ #LavenderBlush : getQuoteList()
+    return quoteList
 
-    Quotely -> AppData ++: getCompanyName()
-    AppData --> Quotely: companyName
-    deactivate AppData
+    Quotely -> AppData1 ++ #LavenderBlush: getCompanyName()
+    return companyName
 
-    deactivate Quotely
-
+    return
+    destroy AppData1
     return
 end
 
@@ -46,33 +47,29 @@ group Command Execution (Saving Data)
     Quotely -> Parser ++ #DarkSalmon: parse(...)
     Parser -> Command **: new RegisterCommand(...)
     activate Command #Green
-    Parser --> Quotely: cmd:RegisterCommand
-    deactivate Parser
+    return cmd:RegisterCommand
+    return cmd:RegisterCommand
 
     ' 2. Execute Command
     Quotely -> Command ++ #Green: execute(..., companyName, ...)
     ' (Command modifies the companyName object in memory)
-    Command --> Quotely
-    deactivate Command
+    return
 
     ' 3. Save Data
     Quotely -> Quotely ++ #LightBlue: saveDataToFile()
 
-    Quotely -> AppData **: new ApplicationData(quoteList, companyName)
-    activate AppData
+    Quotely -> AppData2 **: new ApplicationData(quoteList, companyName)
+    activate AppData2 #LavenderBlush
+    return appData
 
-    Quotely -> Serializer ++ #FFBBBB: serialize(appData)
-    Serializer --> Quotely: jsonString
-    deactivate Serializer
-    deactivate AppData
+    Quotely -> Serializer ++ #technology: serialize(appData)
+    return jsonString
 
     Quotely -> Storage ++ #Pink: saveData(jsonString)
     Storage -> DB: Write File
-    Storage --> Quotely
-    deactivate Storage
-
-    deactivate Quotely
-
+    return
+    return
+    destroy AppData2
     return
 end
 @enduml
