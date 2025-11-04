@@ -47,4 +47,4 @@ computing totals (including tax), and exporting a printable PDF of a quote.
 <div style="page-break-after: always;"></div>
 
 #### Review/mentoring contributions:
-- Link to PRs reviewed [here](https://github.com/AY2526S1-CS2113-W10-1/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3A%40me). 
+- Link to PRs reviewed [here](https://github.com/AY2526S1-CS2113-W10-1/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3Atanjy55+). 
