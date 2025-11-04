@@ -53,6 +53,7 @@
     - [Delete Quote](#delete-quote)
   - [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 
+<!-- @@author Tanjy55 -->
 
 ## Acknowledgements
 
@@ -81,6 +82,8 @@ The architecture diagram below shows an overview of the main components.
 The class diagram below show a simplified overview class diagram that represents the primary relationship between all classes.
 
 ![Class diagram](./diagrams/class/quotely.png)
+
+<!-- @@author -->
 
 The program work is done by the following main components:
 
@@ -162,6 +165,8 @@ How the `Parser` component works:
 5. The command can communicate with `Data` when it is executed (e.g. to add a quote). Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the Data) to achieve.
 6. The result of the `Parser` execution is encapsulated as a Command object which is returned back from `Parser`.
 
+<!-- @@author Tanjy55 -->
+
 ### Command Component
 
 The Commands define the executable actions that form the logic of Quotely.
@@ -191,6 +196,8 @@ How the `Command` component works:
   * SearchQouoteCommand - Uses a keyword, finds all quotes which name contains keyword, and prints in CLI.
   * ShowQuotesCommand — Retrieves all quotes from QuoteList and prints in CLI.
   * ExitCommand — Signals the application to terminate safely.
+  
+<!-- @@author -->
 
 ### Ui Component
 
@@ -235,6 +242,8 @@ How the `Data` component works:
 * QuotelyState represents the current program state.
   * It tracks whether the user is inside a quote or in the main menu (isInsideQuote()), and which quote is currently active (quoteReference).
   * Implemented as a singleton pattern
+
+<!-- @@author LJQ2001 -->
 
 ### File storage Component
 
@@ -296,6 +305,8 @@ Finally, each item object includes its `itemName`, `price`, `quantity`, and `tax
   }
 }
 ```
+
+<!-- @@author jyx0615 -->
 
 ### Writer Component (PDF export)
 
@@ -449,6 +460,8 @@ Preview of the generated PDF:
 - Improve templates and styling (header/footer, company logo, multiple page handling).
 - Add tests around the command parsing and delegate behaviour; avoid asserting file contents in unit tests (use integration tests or file-existence checks).
 
+<!-- @@author irw9n -->
+
 ### hasTax & tax-handling feature
 
 The hasTax feature checks whether an item in a quote is taxed, and the tax-handling features enables items in a quote to have an individual tax rate assigned to them.
@@ -545,6 +558,8 @@ add i/Chair p/45.00
 
 Expected: Parser fails with WRONG_COMMAND_FORMAT; show the correct command format.
 
+<!-- @@author LJQ2001 -->
+
 ### Gson implementation in File Storage
 
 The file storage feature ensures all data is saved to local file preventing data loss between `Quotley` uses. This is accomplished using the Gson library to serialize data into a JSON format.
@@ -597,6 +612,8 @@ The sequence diagram below illustrates the loading process at startup and the sa
 - **Efficency** : The current "save-on-every-command" strategy is simple and robust but could become inefficient if `QuoteList` grows to thousands entries.
 - **Error Handling** : If the `quotely.json` file becomes corrupted (e.g., manual edit breaks the JSON syntax), the app will log an error and start with a fresh `QuoteList`, overwriting the corrupted file on the next save.
 
+<!-- @@author Tanjy55 -->
+
 Notes
 -----
 
@@ -642,6 +659,8 @@ The proposed improvement must include:
 * New commands to allow user to edit price, quantity and tax values
 
 Additional function: allow user to delete the specified Item
+
+<!-- @@author  -->
 
 ## Product scope
 
