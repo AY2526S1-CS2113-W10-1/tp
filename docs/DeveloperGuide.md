@@ -76,11 +76,11 @@ This approach is similar to the reference AddressBook AB3 which follows a simila
 
 The architecture diagram below shows an overview of the main components.
 
-!['Architecture diagram'](./diagrams/architecturediagram.png)
+![Architecture diagram](./diagrams/architecturediagram.png)
 
 The class diagram below show a simplified overview class diagram that represents the primary relationship between all classes.
 
-!['Class diagram'](./diagrams/class/quotely.png)
+![Class diagram](./diagrams/class/quotely.png)
 
 The program work is done by the following main components:
 
@@ -112,7 +112,7 @@ The program work is done by the following main components:
 
 The sequence diagram below shows the main loop which runs continuously in Quotely until an `exit` command is given by the user.
 
-!['Quotely sequence diagram'](./diagrams/sequence/quotely.png)
+![Quotely sequence diagram](./diagrams/sequence/quotely.png)
 
 Loop sequence explanation:
 
@@ -125,7 +125,7 @@ The above process runs until `Exit` is read from the user.
 
 Sequence diagram example of component interaction when the user adds one quote, and then add one item to that quote:
 
-!['Tax sequence diagram'](./diagrams/sequence/tax.png)
+![Tax sequence diagram](./diagrams/sequence/tax.png)
 
 ### Parser Component
 
@@ -151,7 +151,7 @@ The Parser acts as the command dispatcher for all user inputs.
 
 The class diagram of the `Parser` component is shown below:
 
-!['Parser class diagram'](./diagrams/class/parser.png)
+![Parser class diagram](./diagrams/class/parser.png)
 
 How the `Parser` component works:
 
@@ -172,7 +172,7 @@ The Commands define the executable actions that form the logic of Quotely.
 
 The class diagram of the `Command` component is shown below:
 
-!['Command class diagram'](./diagrams/class/command.png)
+![Command class diagram](./diagrams/class/command.png)
 
 How the `Command` component works:
 
@@ -203,7 +203,7 @@ The Ui is responsible for all user-facing interactions (input and output)
 
 The class diagram of the `Ui` component is shown below:
 
-!['Ui class diagram'](./diagrams/class/ui.png)
+![Ui class diagram](./diagrams/class/ui.png)
 
 How the `Ui` component works:
 
@@ -219,7 +219,7 @@ The Data component is responsible for storing program data (Quote, Item, Company
 
 The class diagram of the `Data` component is shown below:
 
-!['Data class diagram'](./diagrams/class/data.png)
+![Data class diagram](./diagrams/class/data.png)
 
 How the `Data` component works:
 
@@ -251,7 +251,7 @@ and save changes to Data back to local disk after user inputs have been successf
 
 The class diagram of the `File storage` component is shown below:
 
-!['Storage Class Diagram'](diagrams/class/localstorage.png)
+![Storage Class Diagram](diagrams/class/localstorage.png)
 
 How the `File storage` component works:
 
@@ -364,7 +364,7 @@ To solve this problem, QuotelyState was introduced to allow additional Ui elemen
 
 The following sequence diagram shows how an `add` operation uses the QuotelyState
 
-!['quotelystate sequence diagram'](./diagrams/sequence/state.png)
+![quotelystate sequence diagram](./diagrams/sequence/state.png)
 
 The commands depend on QuotelyState in this manner:
 
@@ -428,13 +428,13 @@ export n/office chairs
 
 The sequence diagram below illustrates the steps taken when the `export` command is executed.
 
-!['Export sequence diagram'](./diagrams/sequence/export.png)
+![Export sequence diagram](./diagrams/sequence/export.png)
 
 When the export completes, the application generates a PDF file named `quotation.pdf` in the working directory. The PDF uses an quotation-style layout that includes header information and an itemised table showing each item's description, quantity, unit price, tax, and computed amounts (subtotal, tax, and grand total).
 
 Preview of the generated PDF:
 
-!['pdf quote preview'](./diagrams/quote.png)
+![pdf quote preview](./diagrams/quote.png)
 
 #### Developer notes (implementation)
 
@@ -483,7 +483,7 @@ This sets `taxRate` to a value of `5.00%`.
 
 The sequence diagram below shows what happens when a user executes the `add` command with the tax rate of `5.00%` as shown in the example right above (zoom in if necessary):
 
-!['Tax sequence diagram'](./diagrams/sequence/tax.png)
+![Tax sequence diagram](./diagrams/sequence/tax.png)
 
 This features allows to calculate installments based on the Principal (amount of loan), interest rate and number of payments.
 
@@ -581,7 +581,7 @@ The file storage feature ensures all data is saved to local file preventing data
 
 The sequence diagram below illustrates the loading process at startup and the saving process after a command.
 
-!['Gson sequence diagram'](diagrams/sequence/gson.png)
+![Gson sequence diagram](diagrams/sequence/gson.png)
 
 #### Developers note (Implementation of File Storage)
 
@@ -759,7 +759,7 @@ existing quotes.
 **Test case: Search for a quote from main menu**
 - Command: `search n/001`
 - Expected:  
-!['Search quote output'](./diagrams/searchQuoteOutput.png)
+![Search quote output](./diagrams/searchQuoteOutput.png)
   
 ### Delete Item
 
